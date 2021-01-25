@@ -34,6 +34,7 @@ namespace DAM_WebCam
     public partial class FrmMain : Form
     {
         // Càmera
+        private int canal = 0; // Inicialitzem la càmara, el 0 és l'índex per si tenim més d'una càmera (Administrador de dispositius)
         private Capture kam; // Capture és una captura d'imatges o videos des de qualsevol fitxer de càmera o video: class Emgu.CV.Capture
         private string textQR = "";
 
@@ -71,9 +72,9 @@ namespace DAM_WebCam
                     }
                 }
             }
-            catch (Exception e)
+            catch (Exception excep)
             {
-                MessageBox.Show(e.Message, "Excepció", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(excep.Message, "Excepció", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
 
@@ -81,13 +82,13 @@ namespace DAM_WebCam
         {
             try
             {
-                kam = new Capture(0); // Inicialitzem la càmara, el 0 és l'índex per si tenim més d'una càmera (Administrador de dispositius)
+                kam = new Capture(canal);
                 BtCam.Visible = false;
                 TmCam.Start();
             }
-            catch(Exception ex)
+            catch(Exception excep)
             {
-                MessageBox.Show(ex.Message, "Excepció", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(excep.Message, "Excepció", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
 
